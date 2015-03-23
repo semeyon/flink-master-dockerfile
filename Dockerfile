@@ -34,7 +34,7 @@ rm -f $FLINK_ARCHIVE_NAME"]
 ENV FLINK_JOBMANAGER_SCRIPT_TO_REPLACE 2>&1 < /dev/null &
 ENV FLINK_JOBMANAGER_SCRIPT_REPLACE_WITH 2>&1 < /dev/null
 
-RUN ["/bin/bash", "-c", "cat $FLINK_DIRECTORY/bin/jobmanager.sh | replace-string $FLINK_JOBMANAGER_SCRIPT_TO_REPLACE $FLINK_JOBMANAGER_SCRIPT_REPLACE_WITH > $FLINK_DIRECTORY/bin/jobmanager-blocking.sh && \
+RUN ["/bin/bash", "-c", "cat $FLINK_DIRECTORY/bin/jobmanager.sh | replace-string \"$FLINK_JOBMANAGER_SCRIPT_TO_REPLACE\" \"$FLINK_JOBMANAGER_SCRIPT_REPLACE_WITH\" > $FLINK_DIRECTORY/bin/jobmanager-blocking.sh && \
 chmod +x $FLINK_DIRECTORY/bin/jobmanager-blocking.sh"]
 
 #Configuration variables
@@ -42,8 +42,10 @@ ENV FLINK_MASTER_PROPERTY jobmanager.rpc.address
 ENV FLINK_MASTER_IP 10.0.1.1
 
 # Replace jobmanager master IP-Address
-RUN ["/bin/bash", "-c", "cat $FLINK_DIRECTORY/conf/flink-conf.yaml | yaml-change $FLINK_MASTER_PROPERTY $FLINK_MASTER_IP > $FLINK_DIRECTORY/conf/flink-conf.yaml "]
+RUN ["/bin/bash", "-c", "cat $FLINK_DIRECTORY/conf/flink-conf.yaml | yaml-change $FLINK_MASTER_PROPERTY $FLINK_MASTER_IP > $FLINK_DIRECTORY/conf/flink-conf-new.yaml && \
+/bin/cp $FLINK_DIRECTORY/conf/flink-conf-new.yaml $FLINK_DIRECTORY/conf/flink-conf.yaml && \
+rm $FLINK_DIRECTORY/conf/flink-conf-new.yaml"]
 
 # Start the jobmanager 
-#ENTRYPOINT ["/bin/bash", "-c", "$FLINK_DIRECTORY/bin/jobmanager-blocking.sh start cluster"]
+CMD ["/bin/bash", "-c", "$FLINK_DIRECTORY/bin/jobmanager-blocking.sh start cluster"]
 
