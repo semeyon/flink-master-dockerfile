@@ -39,7 +39,7 @@ chmod +x $FLINK_DIRECTORY/bin/jobmanager-blocking.sh"]
 
 #Configuration variables
 ENV FLINK_MASTER_PROPERTY jobmanager.rpc.address
-ENV FLINK_MASTER_IP 10.0.1.1
+ENV FLINK_MASTER_IP 127.0.0.1
 
 # Replace jobmanager master IP-Address
 RUN ["/bin/bash", "-c", "cat $FLINK_DIRECTORY/conf/flink-conf.yaml | yaml-change $FLINK_MASTER_PROPERTY $FLINK_MASTER_IP > $FLINK_DIRECTORY/conf/flink-conf-new.yaml && \
@@ -47,5 +47,5 @@ RUN ["/bin/bash", "-c", "cat $FLINK_DIRECTORY/conf/flink-conf.yaml | yaml-change
 rm $FLINK_DIRECTORY/conf/flink-conf-new.yaml"]
 
 # Start the jobmanager 
-CMD ["/bin/bash", "-c", "$FLINK_DIRECTORY/bin/jobmanager-blocking.sh start cluster"]
+CMD ["/bin/bash", "-c", "$FLINK_DIRECTORY/bin/start-webclient.sh && $FLINK_DIRECTORY/bin/jobmanager-blocking.sh start cluster"]
 
