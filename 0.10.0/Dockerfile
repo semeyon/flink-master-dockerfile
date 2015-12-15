@@ -39,5 +39,5 @@ EXPOSE 6123
 
 WORKDIR ${FLINK_DIRECTORY}/bin
 # Start the jobmanager
-ENTRYPOINT ["/data/start-flink-master"]
+ENTRYPOINT ["/data/start-flink-master.sh"]
 
