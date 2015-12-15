@@ -33,10 +33,11 @@ tar -xf $FLINK_ARCHIVE_NAME -C $FLINK_DIRECTORY --strip-components=1 && \
 rm -f $FLINK_ARCHIVE_NAME"]
 
 COPY start-flink-master.sh /data/
+RUN chmod +x /data/start-flink-master.sh
 
 EXPOSE 6123
 
 WORKDIR ${FLINK_DIRECTORY}/bin
 # Start the jobmanager
-ENTRYPOINT ["/data/start-flink-master.sh"]
+ENTRYPOINT ["/data/start-flink-master"]
 
