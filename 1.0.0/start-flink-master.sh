@@ -8,7 +8,7 @@ cat $FLINK_DIRECTORY/conf/flink-conf.yaml \
 rm $FLINK_DIRECTORY/conf/flink-conf-new.yaml
 
 # Start the web client
-$FLINK_DIRECTORY/bin/start-webclient.sh
+$FLINK_DIRECTORY/bin/start-local.sh
 
 # Start the flink cluster
 # jobmanager.sh start cluster batch
