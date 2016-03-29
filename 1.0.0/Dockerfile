@@ -11,7 +11,10 @@ ENV FLINK_DOWNLOAD_URL http://wwwftp.ciril.fr/pub/apache/flink/flink-1.0.0/
 ENV FLINK_DIRECTORY /data/flink
 # Default variables
 ENV FLINK_MASTER_PROPERTY jobmanager.rpc.address
-ENV FLINK_MASTER_IP 127.0.0.1
+#ENV FLINK_MASTER_IP 127.0.0.1
+
+ENV AKKA_FRAMESIZE akka.framesize
+ENV AKKA_FRAMESIZE_VAl 20971520b
 
 # Go into data directory
 WORKDIR /data

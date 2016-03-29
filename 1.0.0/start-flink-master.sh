@@ -7,6 +7,9 @@ cat $FLINK_DIRECTORY/conf/flink-conf.yaml \
 /bin/cp $FLINK_DIRECTORY/conf/flink-conf-new.yaml $FLINK_DIRECTORY/conf/flink-conf.yaml && \
 rm $FLINK_DIRECTORY/conf/flink-conf-new.yaml
 
+#Increase akka.framesize parameter to run jobs using flink cli
+echo $AKKA_FRAMESIZE: $AKKA_FRAMESIZE_VAl >> $FLINK_DIRECTORY/conf/flink-conf.yaml
+
 # Start the web client
 $FLINK_DIRECTORY/bin/start-local.sh
 
