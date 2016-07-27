@@ -6,8 +6,8 @@ MAINTAINER Semeyon Svetliy <https://github.com/semeyon/flink-master-dockerfile>
 RUN ["/bin/bash", "-c", "apt-get update && apt-get install python git net-tools -y"]
 
 # Variables for downloading
-ENV FLINK_ARCHIVE_NAME flink-1.0.2-bin-hadoop1-scala_2.10.tgz
-ENV FLINK_DOWNLOAD_URL http://wwwftp.ciril.fr/pub/apache/flink/flink-1.0.2/
+ENV FLINK_ARCHIVE_NAME flink-1.0.3-bin-hadoop1-scala_2.10.tgz
+ENV FLINK_DOWNLOAD_URL http://wwwftp.ciril.fr/pub/apache/flink/flink-1.0.3/
 ENV FLINK_DIRECTORY /data/flink
 # Default variables
 ENV FLINK_MASTER_PROPERTY jobmanager.rpc.address
@@ -36,7 +36,7 @@ mkdir -p $FLINK_DIRECTORY && \
 tar -xf $FLINK_ARCHIVE_NAME -C $FLINK_DIRECTORY --strip-components=1 && \
 rm -f $FLINK_ARCHIVE_NAME"]
 
-ADD ./1.0.2/start-flink-master.sh /data/start-flink-master.sh
+ADD ./1.0.3/start-flink-master.sh /data/start-flink-master.sh
 RUN chmod +x /data/start-flink-master.sh
 
 EXPOSE 6123
